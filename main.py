@@ -21,6 +21,5 @@ valid = validation()
 # print(cen.ipv4("81.4.107.68"))
 
 
-list_of_domains = cert.find_subdomains("uia.no")
-for j in list_of_domains:
-    print(j)
+list_of_domains = cert.find_subdomains("strava.com")
+print(list_of_domains)

@@ -1,4 +1,5 @@
 import requests
+import urllib3
 import re
 
 from typing import List
@@ -27,7 +28,7 @@ class validation:
 
     def validate_domain(self, domain: str) -> str:
         pattern = re.compile(
-            r"(http://|https://|)(?:[A-Za-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]"
+            r"(http://|https://|)(?:[\*A-Za-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]"
         )
         if pattern.match(domain):
             return domain
@@ -44,14 +45,17 @@ class validation:
             raise ValueError("Not a Valid phonenumber")
 
     # TODO: make a proper validation function as this is not working as intended
-    def validate_live_domain(self, domain: List[str]):
+    def validate_live_domain(
+        self, domain: List[str], timeout: int = 15, verify: bool = False
+    ):
+        urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
         for dom in domain:
             try:
-                if self._get(f"https://{dom}", verify=False).ok:
+                if self._get(f"https://{dom}", verify=verify, timeout=timeout).ok:
                     self.online_domains.append(dom)
                 else:
                     self.offline_domains.append(dom)
             except Exception:
                 pass
 
-            return (self.online_domains, self.offline_domains)
+        return (self.online_domains, self.offline_domains)
