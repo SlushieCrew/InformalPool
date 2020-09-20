@@ -11,7 +11,7 @@ class hacker_target:
         self.root_url = "https://api.hackertarget.com/"
 
     def __str__(self):
-        pass
+        return f"HackerTarget {self.__class__}"
 
     def __repr__(self):
         pass
