@@ -21,5 +21,11 @@ valid = validation()
 # print(cen.ipv4("81.4.107.68"))
 
 
-list_of_domains = cert.find_subdomains("strava.com")
-print(list_of_domains)
+# list_of_domains = cert.find_subdomains("strava.com")
+# print(list_of_domains)
+
+import socket
+
+
+def get_ip(self, domain: str):
+    return socket.gethostbyname(domain)

@@ -1,4 +1,5 @@
 import requests
+import socket
 
 from InformalPool.validate import validation
 
@@ -21,3 +22,6 @@ class misc:
     def detect_random_fucking_shit(self, url: str) -> str:
         # just check all random fucking things !
         pass
+
+    def get_ip(self, domain: str):
+        return socket.gethostbyname(domain)
