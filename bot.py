@@ -62,10 +62,8 @@ async def ping(ctx: discord.ext.commands.Context):
 async def roll(ctx, roll: int):
     await ctx.send(random.randint(1, roll))
 
-
 if __name__ == "__main__":
     motd()
-    print(token, type(token))
     bot.add_cog(ht_cog())
     bot.add_cog(sho_cog())
     bot.add_cog(censys_cog())

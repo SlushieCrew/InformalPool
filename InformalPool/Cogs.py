@@ -20,7 +20,7 @@ class censys_cog(commands.Cog):
     @commands.command()
     async def ipv4(self, ctx: discord.ext.commands.Context, domain: str):
         try:
-            await ctx.send(f"```{self.censys.ipv4(self.misc.get_ip(domain))}```")
+            await ctx.send(f"```{self.censys.ipv4(misc().get_ip(domain))}```")
         except Exception as error:
             await ctx.send(f"{error}")
 
@@ -45,7 +45,7 @@ class sho_cog(commands.Cog):
     async def honeypot(self, ctx: discord.ext.commands.Context, str):
         try:
             await ctx.send(
-                f"```{self.sho.honeypot_detect(self.misc.get_ip(domain))}```"
+                f"```{self.sho.honeypot_detect(misc().get_ip(domain))}```"
             )
         except Exception as error:
             await ctx.send(f"{error}")
@@ -63,7 +63,7 @@ class ht_cog(commands.Cog):
     ):
 
         try:
-            await ctx.send(f"```{self.ht.port_scan(self.misc.get_ip(domain))}```")
+            await ctx.send(f"```{self.ht.port_scan(misc().get_ip(domain))}```")
         except Exception as error:
             await ctx.send(f"{error}")
 
@@ -76,7 +76,7 @@ class ht_cog(commands.Cog):
         """ Access to the MTR Traceroute API """
 
         try:
-            await ctx.send(f"```{self.ht.mtr_tracert(self.misc.get_ip(domain))}```")
+            await ctx.send(f"```{self.ht.mtr_tracert(misc().get_ip(domain))}```")
         except Exception as error:
             await ctx.send(f"{error}")
 
@@ -89,7 +89,7 @@ class ht_cog(commands.Cog):
         """ Access to the DNS Lookup API """
 
         try:
-            await ctx.send(f"```{self.ht.dns_lookup(self.misc.get_ip(domain))}```")
+            await ctx.send(f"```{self.ht.dns_lookup(misc().get_ip(domain))}```")
         except Exception as error:
             await ctx.send(f"{error}")
 
@@ -102,7 +102,7 @@ class ht_cog(commands.Cog):
         """ Access to the Whois Lookup API """
 
         try:
-            await ctx.send(f"```{self.ht.whois_lookup(self.misc.get_ip(domain))}```")
+            await ctx.send(f"```{self.ht.whois_lookup(misc().get_ip(domain))}```")
         except Exception as error:
             await ctx.send(f"{error}")
 
@@ -116,7 +116,7 @@ class ht_cog(commands.Cog):
 
         try:
             await ctx.send(
-                f"```{self.ht.reverse_ip_lookup(self.misc.get_ip(domain))}```"
+                f"```{self.ht.reverse_ip_lookup(misc().get_ip(domain))}```"
             )
         except Exception as error:
             await ctx.send(f"{error}")
@@ -163,12 +163,9 @@ class yellow_cog(commands.Cog):
 
 
 class misc_cog(commands.Cog):
-    def __init__(self):
-        self.misc = misc()
-
     @commands.command()
     async def get_ip(self, ctx: discord.ext.commands.Context, domain: str):
         try:
-            await ctx.send(f"```{self.misc.get_ip(domain)}```")
+            await ctx.send(f"```{misc().get_ip(domain)}```")
         except Exception as error:
             await ctx.send(f"{error}")
