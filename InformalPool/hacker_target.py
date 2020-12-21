@@ -87,4 +87,3 @@ class hacker_target:
     def port_scan(self, ip: str) -> str:
         url = f"http://api.hackertarget.com/nmap/?q={self.valid.validate_ip(ip)}"
         return self._get(url).text
-

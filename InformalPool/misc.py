@@ -25,3 +25,16 @@ class misc:
 
     def get_ip(self, domain: str):
         return socket.gethostbyname(domain)
+
+    def discord_format(text_str: str, lang="") -> str:
+        """
+        discord_format [summary]
+
+        Args:
+            text_str (str): text to insert between a codeblock
+            lang (str, optional): [pick a programming language to get syntax highligth]. Defaults to "".
+
+        Returns:
+            str: [description]
+        """
+        return f"```{lang}\n{text_str}\n```"

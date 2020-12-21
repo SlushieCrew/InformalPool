@@ -18,9 +18,9 @@ class censys_cog(commands.Cog):
         self.censys = censys()
 
     @commands.command()
-    async def ipv4(self, ctx: discord.ext.commands.Context, ip: str):
+    async def ipv4(self, ctx: discord.ext.commands.Context, i str):
         try:
-            await ctx.send(f"```{self.censys.ipv4(ip)}```")
+            await ctx.send(f"```{self.censys.ipv4({self.misc.get_ip(domain))}```")
         except Exception as error:
             await ctx.send(f"{error}")
 
@@ -42,9 +42,9 @@ class sho_cog(commands.Cog):
         self.sho = shodan()
 
     @commands.command()
-    async def honeypot(self, ctx: discord.ext.commands.Context, ip: str):
+    async def honeypot(self, ctx: discord.ext.commands.Context,  str):
         try:
-            await ctx.send(f"```{self.sho.honeypot_detect(ip)}```")
+            await ctx.send(f"```{self.sho.honeypot_detect({self.misc.get_ip(domain))}```")
         except Exception as error:
             await ctx.send(f"{error}")
 
@@ -57,11 +57,11 @@ class ht_cog(commands.Cog):
     async def port_scan(
         self,
         ctx: discord.ext.commands.Context,
-        ip: str,
+        domain: str,
     ):
 
         try:
-            await ctx.send(f"```{self.ht.port_scan(ip)}```")
+            await ctx.send(f"```{self.ht.port_scan({self.misc.get_ip(domain))}```")
         except Exception as error:
             await ctx.send(f"{error}")
 
@@ -69,12 +69,12 @@ class ht_cog(commands.Cog):
     async def MTR_tracert(
         self,
         ctx: discord.ext.commands.Context,
-        ip: str,
+        domain: str,
     ):
         """ Access to the MTR Traceroute API """
 
         try:
-            await ctx.send(f"```{self.ht.mtr_tracert(ip)}```")
+            await ctx.send(f"```{self.ht.mtr_tracert({self.misc.get_ip(domain))}```")
         except Exception as error:
             await ctx.send(f"{error}")
 
@@ -82,12 +82,12 @@ class ht_cog(commands.Cog):
     async def dns_lookup(
         self,
         ctx: discord.ext.commands.Context,
-        ip: str,
+        domain: str,
     ):
         """ Access to the DNS Lookup API """
 
         try:
-            await ctx.send(f"```{self.ht.dns_lookup(ip)}```")
+            await ctx.send(f"```{self.ht.dns_lookup({self.misc.get_ip(domain))}```")
         except Exception as error:
             await ctx.send(f"{error}")
 
@@ -95,12 +95,12 @@ class ht_cog(commands.Cog):
     async def whois_lookup(
         self,
         ctx: discord.ext.commands.Context,
-        ip: str,
+        domain: str,
     ):
         """ Access to the Whois Lookup API """
 
         try:
-            await ctx.send(f"```{self.ht.whois_lookup(ip)}```")
+            await ctx.send(f"```{self.ht.whois_lookup({self.misc.get_ip(domain))}```")
         except Exception as error:
             await ctx.send(f"{error}")
 
@@ -108,12 +108,12 @@ class ht_cog(commands.Cog):
     async def reverse_ip_lookup(
         self,
         ctx: discord.ext.commands.Context,
-        ip: str,
+        domain: str,
     ):
         """ Access to the Reverse IP Lookup API """
 
         try:
-            await ctx.send(f"```{self.ht.reverse_ip_lookup(ip)}```")
+            await ctx.send(f"```{self.ht.reverse_ip_lookup({self.misc.get_ip(domain))}```")
         except Exception as error:
             await ctx.send(f"{error}")
 
@@ -121,12 +121,12 @@ class ht_cog(commands.Cog):
     async def http_headers(
         self,
         ctx: discord.ext.commands.Context,
-        ip: str,
+        domain: str,
     ):
         """ Access to the HTTP Headers API """
 
         try:
-            await ctx.send(f"```{self.ht.http_headers(ip)}```")
+            await ctx.send(f"```{self.ht.http_headers(misc().get_ip(domain))}```")
         except Exception as error:
             await ctx.send(f"{error}")
 
@@ -139,10 +139,10 @@ class yellow_cog(commands.Cog):
 
     @commands.command()
     async def check_phonenumber(
-        self, ctx: discord.ext.commands.Context, phonenumber: str
+        self, ctx: discord.ext.commands.Context, search_query: str
     ):
         try:
-            await ctx.send(f"```{self.yellow.check_phonenumber(phonenumber)}```")
+            await ctx.send(f"```{self.yellow.check_phonenumber(search_query)}```")
         except Exception as error:
             await ctx.send(f"{error}")
 

@@ -41,7 +41,6 @@ def motd():
 
 @bot.event
 async def on_ready():
-
     logger.info("InformalPool is Ready!")
 
 
