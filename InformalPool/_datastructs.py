@@ -13,5 +13,5 @@ class AddressStruct:
 @dataclass
 class PhonenumberStruct:
     name: str
-    phoneNumbers: list[str]
+    phoneNumbers: list
     address: AddressStruct

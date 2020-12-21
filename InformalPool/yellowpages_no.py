@@ -1,7 +1,7 @@
 import requests
 import json
 
-from _datastructs import PhonenumberStruct, AddressStruct, asdict
+from ._datastructs import PhonenumberStruct, AddressStruct, asdict
 
 
 class yellowpages:
