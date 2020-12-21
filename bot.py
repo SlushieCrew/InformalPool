@@ -65,6 +65,7 @@ async def roll(ctx, roll: int):
 
 if __name__ == "__main__":
     motd()
+    print(token, type(token))
     bot.add_cog(ht_cog())
     bot.add_cog(sho_cog())
     bot.add_cog(censys_cog())
