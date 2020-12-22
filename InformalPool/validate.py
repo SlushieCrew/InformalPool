@@ -41,19 +41,3 @@ class validation:
             return phonenumber
         else:
             raise ValueError("Not a Valid phonenumber")
-
-    # TODO: make a proper validation function as this is not working as intended
-    def validate_live_domain(
-        self, domain: List[str], timeout: int = 15, verify: bool = False
-    ):
-        urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-        for dom in domain:
-            try:
-                if self._get(f"https://{dom}", verify=verify, timeout=timeout).ok:
-                    self.online_domains.append(dom)
-                else:
-                    self.offline_domains.append(dom)
-            except Exception:
-                pass
-
-        return (self.online_domains, self.offline_domains)
