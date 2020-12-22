@@ -29,10 +29,9 @@ class crtsh_cog(commands.Cog):
         """
 
         _unique_domains = []
-        url = f"https://crt.sh/json?q={self.valid.validate_domain(domain)}"
+        url = f"https://crt.sh/json?q={domain}"
         for domain in requests.get(url).json():
             for u_domain in domain["name_value"].rsplit():
                 if u_domain not in _unique_domains:
-                    self.valid.validate_domain(u_domain)
                     _unique_domains.append(u_domain)
         self.misc.bot_send(_unique_domains, "json")

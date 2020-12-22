@@ -17,6 +17,7 @@ class misc:
         return socket.gethostbyname(domain)
 
     async def bot_send(command, lang: str = ""):
+        print(command)
         try:
             await ctx.send(self.discord_format(command, lang=lang))
         except Exception as error:
