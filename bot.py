@@ -56,6 +56,5 @@ if __name__ == "__main__":
     bot.add_cog(sho_cog())
     bot.add_cog(censys_cog())
     bot.add_cog(crtsh_cog())
-    bot.add_cog(misc_cog())
     bot.add_cog(yellow_cog())
     bot.run(token)

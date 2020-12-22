@@ -12,14 +12,13 @@ class crtsh_cog(commands.Cog):
         self._get = requests.get
         self.valid = validation()
         self.misc = misc()
-        self._pd = pd.read_html
         self._unique_domains = list()
         self.headers = {
             "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Safari/605.1.15"
         }
 
     @commands.command()
-    async def subdomains(self, domain: str) -> list[str]:
+    async def subdomains(self, domain: str):
         """
         subdomains
 
