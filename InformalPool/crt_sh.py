@@ -17,7 +17,7 @@ class crtsh_cog(commands.Cog):
         }
 
     @commands.command()
-    async def subdomains(self, domain: str) -> list[str]:
+    async def subdomains(self, domain: str):
         """
         subdomains
 
