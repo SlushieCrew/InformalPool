@@ -2,11 +2,13 @@ import discord
 import requests
 
 from discord.ext import commands
+from loguru import logger as log
 
 from InformalPool.validate import validation
 from InformalPool.misc import misc
 
 
+@log.catch()
 class crtsh_cog(commands.Cog):
     def __init__(self):
         self._get = requests.get
@@ -17,7 +19,7 @@ class crtsh_cog(commands.Cog):
         }
 
     @commands.command()
-    async def subdomains(self, domain: str):
+    async def subdomains(self, domain):
         """
         subdomains
 
@@ -35,4 +37,5 @@ class crtsh_cog(commands.Cog):
                 if u_domain not in _unique_domains:
                     self.valid.validate_domain(u_domain)
                     _unique_domains.append(u_domain)
+        log.info(_unique_domains)
         self.misc.bot_send(_unique_domains, "json")

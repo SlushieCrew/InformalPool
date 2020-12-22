@@ -16,13 +16,14 @@ class misc:
     def get_ip(self, domain: str):
         return socket.gethostbyname(domain)
 
-    async def bot_send(command, lang: str = ""):
+    async def bot_send(command, lang =""):
+        print(command)
         try:
             await ctx.send(self.discord_format(command, lang=lang))
         except Exception as error:
             await ctx.send(f"{error}")
 
-    def discord_format(text_str, lang="") -> str:
+    def discord_format(text_str, lang=""):
         # if one line use double
         # if multiple lines use tripple
         # if msg is longer than 1.5k word split
