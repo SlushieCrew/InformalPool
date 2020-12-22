@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 import discord
 import random
-import asyncio
-import sys
 
 from os import environ
 from loguru import logger
@@ -20,7 +18,6 @@ load_dotenv()
 token = environ.get("BOT_TOKEN")
 prefix = environ.get("PREFIX")
 client = discord.Client()
-
 bot = commands.Bot(command_prefix=prefix)
 
 
