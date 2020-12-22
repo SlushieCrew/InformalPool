@@ -9,12 +9,6 @@ class misc:
         self._get = requests.get
         self.valid = validation()
 
-    def __str__(self):
-        pass
-
-    def __repr__(self):
-        pass
-
     def detect_robots_txt(self, url: str) -> str:
         # check for robots txt files
         pass
@@ -25,6 +19,12 @@ class misc:
 
     def get_ip(self, domain: str):
         return socket.gethostbyname(domain)
+
+    async def bot_send(command:str, lang:str=""):
+        try:
+            await ctx.send(self.discord_format(command, lang=lang))
+        except Exception as error:
+            await ctx.send(f"{error}"
 
     def discord_format(text_str: str, lang="") -> str:
         """

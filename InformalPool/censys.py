@@ -3,20 +3,24 @@
 # https://censys.io/certificates?q=vg.no
 
 import requests
+import discord
+import random
+
+from os import environ
+from loguru import logger
+from discord.ext import commands
+
 from InformalPool.validate import validation
+from InformalPool.misc import misc
 
 
-class censys:
+class censys_cog(commands.Cog):
     def __init__(self):
         self._get = requests.get
         self.valid = validation()
+        self.misc = misc()
 
-    def __str__(self):
-        pass
-
-    def __repr__(self):
-        pass
-
-    def ipv4(self, ip: str):
+    @commands.command()
+    async def ipv4(self, ctx: discord.ext.commands.Context, domain: str):
         url = f"https://censys.io/ipv4/{self.valid.validate_ip(ip)}/raw"
-        print(self._get(url).text)
+        misc.bot_send(self._get(url).text, "json")

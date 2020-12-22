@@ -9,11 +9,11 @@ from loguru import logger
 from dotenv import load_dotenv
 from discord.ext import commands
 
+from InformalPool.censys import censys_cog
 from InformalPool.Cogs import (
     ht_cog,
     sho_cog,
     crtsh_cog,
-    censys_cog,
     misc_cog,
     yellow_cog,
 )
@@ -51,16 +51,6 @@ async def on_command_error(ctx: discord.ext.commands.Context, error):
         await ctx.send(f"Error: {error} Use ``!help {ctx.command}`` for usage")
     else:
         await ctx.send(f"Error: {error}")
-
-
-@bot.command()
-async def ping(ctx: discord.ext.commands.Context):
-    await ctx.send("Pong")
-
-
-@bot.command()
-async def roll(ctx, roll: int):
-    await ctx.send(random.randint(1, roll))
 
 
 if __name__ == "__main__":

@@ -7,22 +7,9 @@ from discord.ext import commands
 
 from InformalPool.hacker_target import hacker_target
 from InformalPool.shodan import shodan
-from InformalPool.censys import censys
 from InformalPool.crt_sh import crt_sh
 from InformalPool.misc import misc
 from InformalPool.yellowpages_no import yellowpages
-
-
-class censys_cog(commands.Cog):
-    def __init__(self):
-        self.censys = censys()
-
-    @commands.command()
-    async def ipv4(self, ctx: discord.ext.commands.Context, domain: str):
-        try:
-            await ctx.send(f"```{self.censys.ipv4(self.misc.get_ip(domain))}```")
-        except Exception as error:
-            await ctx.send(f"{error}")
 
 
 class crtsh_cog(commands.Cog):
