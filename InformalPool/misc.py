@@ -16,9 +16,9 @@ class misc:
     def get_ip(self, domain: str):
         return socket.gethostbyname(domain)
 
-    async def bot_send(command:str, lang:str=""):
+    async def bot_send(command: str, lang: str = ""):
         try:
-            await ctx.send(self.discord_format(command, lang=lang))
+            await ctx.send(command)
         except Exception as error:
             await ctx.send(f"{error}")
 
