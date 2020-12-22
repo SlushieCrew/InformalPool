@@ -55,7 +55,6 @@ async def on_command_error(ctx: discord.ext.commands.Context, error):
 
 if __name__ == "__main__":
     motd()
-    print(token, type(token))
     bot.add_cog(ht_cog())
     bot.add_cog(sho_cog())
     bot.add_cog(censys_cog())

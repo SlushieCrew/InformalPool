@@ -40,5 +40,5 @@ class yellowpages:
                         ),
                     )
                 )
-        del search_query[::]  # else the variable is not propely cleaned
+        del search_query  # else the variable is not propely cleaned
         return self._json_pretty(result)
