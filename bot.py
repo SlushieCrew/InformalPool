@@ -37,7 +37,7 @@ def motd():
 async def on_ready():
     logger.info("InformalPool is Ready!")
 
-
+"""
 @bot.event
 async def on_command_error(ctx: discord.ext.commands.Context, error):
     logger.error(error)
@@ -45,7 +45,7 @@ async def on_command_error(ctx: discord.ext.commands.Context, error):
         await ctx.send(f"Error: {error} Use ``!help {ctx.command}`` for usage")
     else:
         await ctx.send(f"Error: {error}")
-
+"""
 
 if __name__ == "__main__":
     motd()
