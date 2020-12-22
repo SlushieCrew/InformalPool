@@ -14,7 +14,7 @@ class sho_cog(commands.Cog):
         self.misc = misc()
 
     @commands.command()
-    def honeypot(self, domain: str, detect_score=0.5) -> str:
+    async def honeypot(self, domain: str, detect_score=0.5) -> str:
         """
         honeypot - detect if system is a honeypot
 
