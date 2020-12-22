@@ -1,26 +1,34 @@
+import discord
 import requests
+
+from discord.ext import commands
+
 from InformalPool.validate import validation
+from InformalPool.misc import misc
 
 
-class shodan:
+class sho_cog(commands.Cog):
     def __init__(self):
         self._get = requests.get
         self.valid = validation()
+        self.misc = misc()
 
-    def __str__(self):
-        pass
+    @commands.command()
+    def honeypot(self, domain: str, detect_score=0.5) -> str:
+        """
+        honeypot - detect if system is a honeypot
 
-    def __repr__(self):
-        pass
+        Args:
+            domain (str): [domain to check if is a honeypot]
+            detect_score (float, optional): what score should classify as honeypot. Defaults to 0.5.
 
-    def honeypot_detect(self, ip: str, detect_score=0.5) -> str:
-        # TODO: implement as that you can enter a domain and that it will resolve it's ip and use that to search for!
-
-        url = f"https://api.shodan.io/labs/honeyscore/{self.valid.validate_ip(ip)}?key=Hgqwf9dHMIE157PNCeqVJc6TVvlyGKiP"
+        Returns:
+            str: [result of detection]
+        """
+        url = f"https://api.shodan.io/labs/honeyscore/{self.misc.get_ip(self.valid.validate_domain(domain))}?key=Hgqwf9dHMIE157PNCeqVJc6TVvlyGKiP"
         score = self._get(url).text
         if float(score) >= detect_score:
-            return f"{score} - Does NOT look like a real system!!!"
+            self.misc.bot_send(f"{score} - Does NOT look like a real system!!!")
 
         if float(score) <= detect_score:
-            return f"{score} - Looks like a real system!"
-
+            self.misc.bot_send(f"{score} - Looks like a real system!")

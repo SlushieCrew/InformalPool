@@ -1,17 +1,30 @@
 import requests
+import discord
 import json
 
+from discord.ext import commands
+
+from InformalPool.validate import validation
 from ._datastructs import PhonenumberStruct, AddressStruct, asdict
+from InformalPool.misc import misc
 
 
-class yellowpages:
+class yellow_cog(commands.Cog):
     def __init__(self):
         self._get = requests.get
+        self.valid = validation()
+        self.misc = misc()
 
-    def _json_pretty(self, data: dict) -> dict:
-        return json.dumps(data, indent=4)
+    @commands.command()
+    async def gulesider(self, search_query: str, search_limit: int = 15):
+        """
+        gulesider - check number or name againt yellowpages api
 
-    def check_phonenumber(self, search_query: str, search_limit: int = 15):
+        Args:
+            search_query (str): [who do you want to lookup?]
+            search_limit (int, optional): [description]. Defaults to 15.
+        """
+
         result = {}
         url = f"https://www.gulesider.no/api/ps?query={search_query}&sortOrder=default&profile=no&page=1&lat=0&lng=0&limit={search_limit}&client=true"
         if self._get(url).json()["hits"] == 0:
@@ -41,4 +54,4 @@ class yellowpages:
                     )
                 )
         del search_query  # else the variable is not propely cleaned
-        return self._json_pretty(result)
+        self.misc.bot_send(self.misc._json_pretty(result), "json")

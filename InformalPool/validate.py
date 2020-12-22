@@ -2,8 +2,6 @@ import requests
 import urllib3
 import re
 
-from typing import List
-
 
 class validation:
     def __init__(self):

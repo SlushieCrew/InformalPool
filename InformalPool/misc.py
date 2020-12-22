@@ -11,11 +11,14 @@ class misc:
 
     def detect_robots_txt(self, url: str) -> str:
         # check for robots txt files
-        pass
+        ...
 
     def detect_random_fucking_shit(self, url: str) -> str:
         # just check all random fucking things !
-        pass
+        ...
+
+    def _json_pretty(self, data: dict) -> dict:
+        return json.dumps(data, indent=4)
 
     def get_ip(self, domain: str):
         return socket.gethostbyname(domain)
@@ -37,4 +40,8 @@ class misc:
         Returns:
             str: [description]
         """
+        # if one line use double
+        # if multiple lines use tripple
+        # if msg is longer than 1.5k word split
+        # if msg is longer than 3k words break.. as that's more than two whole messages!
         return f"```{lang}\n{text_str}\n```"

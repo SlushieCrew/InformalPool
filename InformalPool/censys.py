@@ -4,10 +4,7 @@
 
 import requests
 import discord
-import random
 
-from os import environ
-from loguru import logger
 from discord.ext import commands
 
 from InformalPool.validate import validation
@@ -23,4 +20,4 @@ class censys_cog(commands.Cog):
     @commands.command()
     async def ipv4(self, ctx: discord.ext.commands.Context, domain: str):
         url = f"https://censys.io/ipv4/{self.valid.validate_ip(ip)}/raw"
-        misc.bot_send(self._get(url).text, "json")
+        self.misc.bot_send(self._get(url).text, "json")

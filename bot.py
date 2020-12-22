@@ -10,13 +10,10 @@ from dotenv import load_dotenv
 from discord.ext import commands
 
 from InformalPool.censys import censys_cog
-from InformalPool.Cogs import (
-    ht_cog,
-    sho_cog,
-    crtsh_cog,
-    misc_cog,
-    yellow_cog,
-)
+from InformalPool.hacker_target import ht_cog
+from InformalPool.shodan import sho_cog
+from InformalPool.crt_sh import crtsh_cog
+from InformalPool.yellowpages_no import yellow_cog
 
 load_dotenv()
 
