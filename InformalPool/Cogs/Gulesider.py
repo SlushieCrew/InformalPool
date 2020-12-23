@@ -3,10 +3,11 @@ import discord
 import json
 
 from discord.ext import commands
+from loguru import logger as log
 
-from InformalPool.validate import validation
-from ._datastructs import PhonenumberStruct, AddressStruct, asdict
-from InformalPool.misc import misc
+from ..Modules._datastructs import PhonenumberStruct, AddressStruct, asdict
+from ..Modules._misc import misc
+from ..Modules._validate import validation
 
 
 class yellow_cog(commands.Cog):
@@ -14,9 +15,11 @@ class yellow_cog(commands.Cog):
         self._get = requests.get
         self.valid = validation()
         self.misc = misc()
+        log.info('Loaded Gulesider')
+
 
     @commands.command()
-    async def gulesider(self, search_query: str, search_limit: int = 15):
+    async def gulesider(self,ctx, search_query: str, search_limit = 15):
         """
         gulesider - check number or name againt yellowpages api
 
@@ -34,12 +37,12 @@ class yellow_cog(commands.Cog):
                 _id = response["id"]
                 _name = response["name"]
                 _phoneNumbers = [k for k in list(response["phoneNumbers"])]
-                _address = response["address"][0]
+                _address = response["address"]
                 _postcode = _address["postCode"]
                 _postArea = _address["postArea"]
                 _regionName = _address["regionName"]
-                _xCoord = response["location"][0]["xCoord"]
-                _yCoord = response["location"][0]["yCoord"]
+                #_xCoord = response["location"]["xCoord"]
+                #_yCoord = response["location"]["yCoord"]
                 result[_id] = asdict(
                     PhonenumberStruct(
                         name=_name,
@@ -48,10 +51,13 @@ class yellow_cog(commands.Cog):
                             postCode=_postcode,
                             postArea=_postArea,
                             regionName=_regionName,
-                            xCoord=_xCoord,
-                            yCoord=_yCoord,
+                            xCoord="",
+                            yCoord="",
                         ),
                     )
                 )
-        del search_query  # else the variable is not propely cleaned
-        self.misc.bot_send(self.misc._json_pretty(result), "json")
+        log.info(result)
+        #del search_query  # else the variable is not propely cleaned
+        #self.misc.bot_send(self.misc._json_pretty(result), "json")
+        await self.misc.bot_send(ctx, self.misc._json_pretty(result), lang="json")
+
