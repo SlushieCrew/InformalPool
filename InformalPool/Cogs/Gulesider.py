@@ -5,21 +5,19 @@ import json
 from discord.ext import commands
 from loguru import logger as log
 
-from ..Modules._datastructs import PhonenumberStruct, AddressStruct, asdict
-from ..Modules._misc import misc
-from ..Modules._validate import validation
+from ..Modules._Datastructs import PhonenumberStruct, AddressStruct, asdict
+from ..Modules._Utility import _Utility
+from ..Modules._Validate import _Validate
 
 
-class yellow_cog(commands.Cog):
+class Gulesider(commands.Cog):
     def __init__(self):
         self._get = requests.get
-        self.valid = validation()
-        self.misc = misc()
-        log.info('Loaded Gulesider')
-
+        self.valid = _Validate()
+        self.utility = _Utility()
 
     @commands.command()
-    async def gulesider(self,ctx, search_query: str, search_limit = 15):
+    async def gulesider(self, ctx, search_query: str, search_limit=15):
         """
         gulesider - check number or name againt yellowpages api
 
@@ -41,8 +39,8 @@ class yellow_cog(commands.Cog):
                 _postcode = _address["postCode"]
                 _postArea = _address["postArea"]
                 _regionName = _address["regionName"]
-                #_xCoord = response["location"]["xCoord"]
-                #_yCoord = response["location"]["yCoord"]
+                # _xCoord = response["location"]["xCoord"]
+                # _yCoord = response["location"]["yCoord"]
                 result[_id] = asdict(
                     PhonenumberStruct(
                         name=_name,
@@ -57,7 +55,6 @@ class yellow_cog(commands.Cog):
                     )
                 )
         log.info(result)
-        #del search_query  # else the variable is not propely cleaned
-        #self.misc.bot_send(self.misc._json_pretty(result), "json")
-        await self.misc.bot_send(ctx, self.misc._json_pretty(result), lang="json")
-
+        # del search_query  # else the variable is not propely cleaned
+        # self.utility.bot_send(self.utility._json_pretty(result), "json")
+        await self.utility.bot_send(ctx, self.utility._json_pretty(result), lang="json")

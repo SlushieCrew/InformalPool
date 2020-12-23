@@ -5,25 +5,31 @@ from discord.ext import commands
 from loguru import logger as log
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
-from ..Modules._misc import misc
+from ..Modules._Utility import _Utility
+from ..Modules._Validate import _Validate
+
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
-class crtsh_cog(commands.Cog):
+
+class CrtSh(commands.Cog):
     def __init__(self):
         self._get = requests.get
-        self.misc = misc()
-        log.info('Loaded CrtSh')
+        self.utility = _Utility()
+        self.valid = _Validate()
 
-    def is_domain_alive(self, domain:str, timeout:int=3):
+    def is_domain_alive(self, domain: str, timeout: int = 3):
         if "http" or "https" not in domain:
             domain = f"https://{domain}"
 
         try:
-            if requests.get(f'{domain}', timeout=timeout, verify=False).status_code is not False:
-                return (domain)
+            if (
+                requests.get(f"{domain}", timeout=timeout, verify=False).status_code
+                is not False
+            ):
+                return domain
 
         except Exception:
-            return False 
+            return False
 
     @commands.command()
     async def subdomain(self, ctx, domain):
@@ -49,7 +55,4 @@ class crtsh_cog(commands.Cog):
             if self.is_domain_alive(_domain) != False:
                 _alive_domains.append(_domain)
 
-        await self.misc.bot_send(ctx, sorted(_alive_domains), lang="json")
-
-
-    
+        await self.utility.bot_send(ctx, sorted(_alive_domains), lang="json")

@@ -3,7 +3,7 @@ import urllib3
 import re
 
 
-class validation:
+class _Validate:
     def __init__(self):
         self.online_domains = []
         self.offline_domains = []

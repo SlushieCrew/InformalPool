@@ -1,50 +1,57 @@
 import discord
 
-from os import environ
-from loguru import logger
+from os import environ, listdir
+from loguru import logger as log
 from dotenv import load_dotenv
 from discord.ext import commands
 
-from .Modules._misc import misc
-from .Cogs.Censys import censys_cog
-from .Cogs.CrtSh import crtsh_cog
-from .Cogs.Shodan import sho_cog
-from .Cogs.HackerTarget import ht_cog
-from .Cogs.Gulesider import yellow_cog
+from .Modules._Utility import _Utility
+
+from .Cogs.Censys import Censys
+from .Cogs.CrtSh import CrtSh
+from .Cogs.Shodan import Shodan
+from .Cogs.HackerTarget import HackerTarget
+from .Cogs.Gulesider import Gulesider
 from .Cogs.Greetings import Greetings
+from .Cogs.Alienvault import Alienvault
+from .Cogs.Sherlock import Sherlock
 
 # Load .env file
 load_dotenv()
 
-token = environ.get("BOT_TOKEN")
-prefix = environ.get("PREFIX")
-bot = commands.Bot(command_prefix=prefix)
- 
+TOKEN = environ.get("BOT_TOKEN")
+PREFIX = environ.get("PREFIX")
+BOT = commands.Bot(command_prefix=PREFIX)
+
+# Functions that need imports but not circular imports
+# TODO: move function to _Utility, with out the  with circular imports
+def _list_avaliable_cogs() -> list:
+    _list = listdir("./InformalPool/Cogs")
+    _avaliable_cogs = [
+        eval(_item.split(".py")[0]) for _item in _list if not _item.startswith("_")
+    ]
+    return _avaliable_cogs
+
+
 # Events
-@bot.event
+@BOT.event
 async def on_ready():
-    logger.info(f"{bot.user.name} is Ready!")
+    log.info(f"{BOT.user.name} is Ready!")
 
-@bot.event
-async def on_error(event, *args, **kwargs):
-    with open('err.log', 'a') as f:
-        if event == 'on_message':
-            logger.error(f'Unhandled message: {args[0]}\n')
-        else:
-            raise
 
-@bot.event
+@BOT.event
 async def on_command_error(ctx: discord.ext.commands.Context, error):
-    logger.error(error)
+    log.error(error)
     if type(error) == discord.ext.commands.errors.MissingRequiredArgument:
         await ctx.send(f"Error: {error} Use ``!help {ctx.command}`` for usage")
     else:
         await ctx.send(f"Error: {error}")
 
-# Add all the cogs 
-print(misc().motd())
-bot.add_cog(crtsh_cog())
-bot.add_cog(censys_cog())
-bot.add_cog(sho_cog())
-bot.add_cog(ht_cog())
-#bot.add_cog(yellow_cog())
+
+print(_Utility().motd())
+for _cog in _list_avaliable_cogs():
+    try:
+        log.debug(f"Loaded {_cog().__class__.__name__}")
+        BOT.add_cog(_cog())
+    except TypeError as e:
+        log.error(e)
