@@ -8,7 +8,7 @@ from ..Modules._Validate import _Validate
 
 class Greetings(commands.Cog):
     def __init__(self):
-        ...
+        self._load_cog = False
 
     @commands.command(name="create-channel")
     @commands.has_role("Administrators")

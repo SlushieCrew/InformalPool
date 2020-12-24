@@ -12,6 +12,7 @@ from ..Modules._Validate import _Validate
 
 class Gulesider(commands.Cog):
     def __init__(self):
+        self._load_cog = False
         self._get = requests.get
         self.valid = _Validate()
         self.utility = _Utility()
@@ -56,5 +57,4 @@ class Gulesider(commands.Cog):
                 )
         log.info(result)
         # del search_query  # else the variable is not propely cleaned
-        # self.utility.bot_send(self.utility._json_pretty(result), "json")
-        await self.utility.bot_send(ctx, self.utility._json_pretty(result), lang="json")
+        await self.utility.bot_send(ctx, result, lang="json")

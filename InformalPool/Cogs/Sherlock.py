@@ -11,7 +11,7 @@ from ..Modules._Validate import _Validate
 
 class Sherlock(commands.Cog):
     def __init__(self):
-        self._load_cog = True  # if cog should be loaded on startup
+        self._load_cog = False
         self.valid = _Validate()
         self.utility = _Utility()
 

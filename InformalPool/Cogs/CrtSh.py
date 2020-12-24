@@ -13,6 +13,7 @@ requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 class CrtSh(commands.Cog):
     def __init__(self):
+        self._load_cog = True
         self._get = requests.get
         self.utility = _Utility()
         self.valid = _Validate()

@@ -14,7 +14,7 @@ from ..Modules._Validate import _Validate
 
 class Censys(commands.Cog):
     def __init__(self):
-        self._load_cog = True
+        self._load_cog = False
         self._get = lambda url: requests.get(url)
         self.valid = _Validate()
         self.utility = _Utility()

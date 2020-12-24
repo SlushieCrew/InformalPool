@@ -11,12 +11,10 @@ from ..Modules._Validate import _Validate
 
 class HackerTarget(commands.Cog):
     def __init__(self):
+        self._load_cog = False
         self._get = lambda url: requests.get(url)
         self.valid = _Validate()
         self.utility = _Utility()
-
-    def __str__(self):
-        return f"HackerTarget {self.__class__}"
 
     @commands.command()
     async def mtr_tracert(self, ctx, domain: str) -> str:

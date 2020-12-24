@@ -15,8 +15,7 @@ class Alienvault(commands.Cog):
         self.valid = _Validate()
         self.utility = _Utility()
 
-    # TODO: https://otx.alienvault.com/api/v1/indicators/domain/datapor.no/url_list
-
+    # @commands.has_role("Infosec")
     @commands.command()
     async def passive_dns(self, ctx, domain: str):
         """

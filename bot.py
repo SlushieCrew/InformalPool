@@ -1,4 +1,4 @@
 #!/usr/bin/env python3
-from InformalPool import BOT, TOKEN
+from Scruffy import BOT, TOKEN
 
 BOT.run(TOKEN)

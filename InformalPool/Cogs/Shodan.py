@@ -10,6 +10,7 @@ from ..Modules._Validate import _Validate
 
 class Shodan(commands.Cog):
     def __init__(self):
+        self._load_cog = True
         self._get = requests.get
         self.valid = _Validate()
         self.utility = _Utility()

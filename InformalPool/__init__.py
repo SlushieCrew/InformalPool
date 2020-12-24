@@ -7,14 +7,7 @@ from discord.ext import commands
 
 from .Modules._Utility import _Utility
 
-from .Cogs.Censys import Censys
-from .Cogs.CrtSh import CrtSh
-from .Cogs.Shodan import Shodan
-from .Cogs.HackerTarget import HackerTarget
-from .Cogs.Gulesider import Gulesider
-from .Cogs.Greetings import Greetings
-from .Cogs.Alienvault import Alienvault
-from .Cogs.Sherlock import Sherlock
+from .Cogs import *
 
 # Load .env file
 load_dotenv()
@@ -51,7 +44,10 @@ async def on_command_error(ctx: discord.ext.commands.Context, error):
 print(_Utility().motd())
 for _cog in _list_avaliable_cogs():
     try:
-        log.debug(f"Loaded {_cog().__class__.__name__}")
-        BOT.add_cog(_cog())
+        if _cog()._load_cog is True:
+            BOT.add_cog(_cog())
+            log.debug(f"Loaded {_cog().__class__.__name__}")
+        else:
+            log.warning(f"Not Loading {_cog().__class__.__name__}")
     except TypeError as e:
         log.error(e)
