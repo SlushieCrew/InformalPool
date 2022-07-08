@@ -5,12 +5,14 @@ name = "pypi"
 
 [packages]
 loguru = "*"
-discord = "*"
-"discord.py" = "*"
 requests = "*"
 python-dotenv = "*"
+py-cord = {extras = ["speedup"], version = "*"}
 
 [dev-packages]
 
 [requires]
-python_version = "3.8"
+python_version = "3"
+
+[pipenv]
+allow_prereleases = true

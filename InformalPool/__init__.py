@@ -12,9 +12,9 @@ from .Cogs import *
 # Load .env file
 load_dotenv()
 
+# new py-cord stuff
+BOT = discord.Bot()
 TOKEN = environ.get("BOT_TOKEN")
-PREFIX = environ.get("PREFIX")
-BOT = commands.Bot(command_prefix=PREFIX)
 
 # Functions that need imports but not circular imports
 # TODO: move function to _Utility, with out the  with circular imports

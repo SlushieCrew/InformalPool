@@ -17,7 +17,7 @@ class Alienvault(commands.Cog):
 
     # @commands.has_role("Infosec")
     @commands.command()
-    async def passive_dns(self, ctx, domain: str):
+    async def av_passive_dns(self, ctx, domain: str):
         """
         passive_dns
 
